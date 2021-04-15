@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -40,7 +41,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView1" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/detailsBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/details_btn"
@@ -83,7 +84,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/detailsBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/details_btn"
@@ -126,7 +127,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/detailsBtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/details_btn"
