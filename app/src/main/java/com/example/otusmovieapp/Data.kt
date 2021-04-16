@@ -1,5 +1,8 @@
 package com.example.otusmovieapp
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 class Data {
 
     companion object{
@@ -9,4 +12,7 @@ class Data {
             Movie("Justice League", R.drawable.image3, false)
         )
     }
+
+    @Parcelize
+    class Movie(val title: String, val imageResource: Int, var isReviewed: Boolean): Parcelable
 }

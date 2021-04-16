@@ -5,7 +5,9 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.otusmovieapp.Data.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,10 +16,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var movieList: ArrayList<Movie>
+    private lateinit var viewList: List<Pair<ImageView, TextView>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewList = listOf(
+            Pair(findViewById(R.id.imageView1), findViewById(R.id.textView1)),
+            Pair(findViewById(R.id.imageView2), findViewById(R.id.textView2)),
+            Pair(findViewById(R.id.imageView3), findViewById(R.id.textView3)),
+        )
 
         movieList =
             if (savedInstanceState != null)
@@ -25,26 +34,28 @@ class MainActivity : AppCompatActivity() {
             else
                 Data.movieList
 
-        updateMoviesReviewState()
+        onBindMovies()
     }
 
     override fun onStart() {
         super.onStart()
-        updateMoviesReviewState()
+        onBindMovies()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(MOVIES, movieList)
+        super.onSaveInstanceState(outState)
     }
 
     fun onDetailsClicked(view: View){
-        when(view.id){
-            R.id.detailsBtn1 -> {
-                launchDetailsActivity(movieList[0])
-            }
-            R.id.detailsBtn2 -> {
-                launchDetailsActivity(movieList[1])
-            }
-            R.id.detailsBtn3 -> {
-                launchDetailsActivity(movieList[2])
-            }
+        val position = when(view.id){
+            R.id.detailsBtn1 -> 0
+            R.id.detailsBtn2 -> 1
+            R.id.detailsBtn3 -> 2
+            else -> -1
         }
+        if (position != -1)
+            launchDetailsActivity(movieList[position])
     }
 
     private fun launchDetailsActivity(movie: Movie){
@@ -55,17 +66,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun updateMoviesReviewState(){
-        if (movieList[0].isReviewed)
-            findViewById<TextView>(R.id.textView1).setTextColor(Color.RED)
-        if (movieList[1].isReviewed)
-            findViewById<TextView>(R.id.textView2).setTextColor(Color.RED)
-        if (movieList[2].isReviewed)
-            findViewById<TextView>(R.id.textView3).setTextColor(Color.RED)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(MOVIES, movieList)
-        super.onSaveInstanceState(outState)
+    private fun onBindMovies(){
+        for ((position, movie) in movieList.withIndex()) {
+            val (imageView, textView) = viewList[position]
+            imageView.setImageResource(movie.imageResource)
+            textView.text = movie.title
+            if (movie.isReviewed) textView.setTextColor(Color.RED)
+        }
     }
 }
