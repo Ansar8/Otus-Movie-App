@@ -50,8 +50,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDetails(movie: Movie) {
+    private fun showDetails(movie: Movie, position: Int) {
         movie.isReviewed = true
+        recyclerView.adapter?.notifyItemChanged(position)
 
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra(DetailsActivity.DETAILS_EXTRA, movie)

@@ -8,18 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MovieItemViewHolder(itemView: View,
-                          val detailsClicked: (Movie) -> Unit,
+                          val detailsClicked: (Movie, Int) -> Unit,
                           val inviteClicked: (Movie) -> Unit): RecyclerView.ViewHolder(itemView) {
 
     private val image: ImageView = itemView.findViewById(R.id.imageView)
     private val title: TextView = itemView.findViewById(R.id.textView)
     private val detailsButton: Button =  itemView.findViewById(R.id.detailsBtn)
-    val inviteButton: Button =  itemView.findViewById(R.id.inviteBtn)
+    private val inviteButton: Button =  itemView.findViewById(R.id.inviteBtn)
 
-    fun onBind(item: Movie){
+    fun onBind(item: Movie, position: Int){
         image.setImageResource(item.imageResource)
         title.text = item.title
-        detailsButton.setOnClickListener { detailsClicked(item) }
+        detailsButton.setOnClickListener { detailsClicked(item, position) }
         inviteButton.setOnClickListener { inviteClicked(item) }
 
         if (item.isReviewed)
