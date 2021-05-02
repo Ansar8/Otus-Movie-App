@@ -1,175 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:fillViewport="true">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="5dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movieRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:paddingHorizontal="10dp"
-        tools:context=".MainActivity">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_movie"
+        tools:itemCount="4"/>
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="5dp"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/image1"
-            app:layout_constraintBottom_toTopOf="@id/imageView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:padding="5dp"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/imageView1"
-            app:layout_constraintTop_toTopOf="@+id/imageView1"
-            tools:text="@string/godzilla_movie" />
-
-        <Button
-            android:id="@+id/detailsBtn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="onDetailsButtonClicked"
-            android:text="@string/details_btn"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView1"
-            app:layout_constraintEnd_toEndOf="@+id/imageView1" />
-
-        <Button
-            android:id="@+id/inviteBtn1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/invite_btn"
-            android:textSize="15sp"
-            android:onClick="onInviteButtonClicked"
-            app:layout_constraintBottom_toTopOf="@+id/detailsBtn1"
-            app:layout_constraintEnd_toEndOf="@+id/detailsBtn1"
-            app:layout_constraintTop_toTopOf="@id/imageView1"
-            app:layout_constraintVertical_bias="1" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:layout_marginVertical="5dp"
-            tools:src="@drawable/image2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView1"
-            app:layout_constraintBottom_toTopOf="@id/imageView3"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:padding="5dp"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
-            tools:text="@string/raya_movie" />
-
-        <Button
-            android:id="@+id/detailsBtn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="onDetailsButtonClicked"
-            android:text="@string/details_btn"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2" />
-
-        <Button
-            android:id="@+id/inviteBtn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/invite_btn"
-            android:textSize="15sp"
-            android:onClick="onInviteButtonClicked"
-            app:layout_constraintBottom_toTopOf="@+id/detailsBtn2"
-            app:layout_constraintEnd_toEndOf="@+id/detailsBtn2"
-            app:layout_constraintTop_toTopOf="@id/imageView2"
-            app:layout_constraintVertical_bias="1" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:layout_marginVertical="5dp"
-            tools:src="@drawable/image3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:padding="5dp"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3"
-            tools:text="@string/justice_league_movie" />
-
-        <Button
-            android:id="@+id/detailsBtn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:onClick="onDetailsButtonClicked"
-            android:text="@string/details_btn"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-            app:layout_constraintEnd_toEndOf="@+id/imageView3" />
-
-        <Button
-            android:id="@+id/inviteBtn3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/invite_btn"
-            android:textSize="15sp"
-            android:onClick="onInviteButtonClicked"
-            app:layout_constraintBottom_toTopOf="@+id/detailsBtn3"
-            app:layout_constraintEnd_toEndOf="@+id/detailsBtn3"
-            app:layout_constraintTop_toTopOf="@id/imageView3"
-            app:layout_constraintVertical_bias="1" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
