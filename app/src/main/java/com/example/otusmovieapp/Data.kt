@@ -12,7 +12,4 @@ class Data {
             Movie("Justice League", R.drawable.image3, false)
         )
     }
-
-    @Parcelize
-    class Movie(val title: String, val imageResource: Int, var isReviewed: Boolean): Parcelable
 }
