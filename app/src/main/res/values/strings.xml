@@ -5,4 +5,7 @@
     <string name="raya_movie">Raya</string>
     <string name="godzilla_movie">Godzilla</string>
     <string name="invite_btn">Invite</string>
+    <string name="favorites">Favorites</string>
+    <string name="save">Save changes</string>
+    <string name="save_changes_message">Don\'t forget to save changes !</string>
 </resources>
