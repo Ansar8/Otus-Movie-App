@@ -3,9 +3,8 @@ package com.example.otusmovieapp
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -13,9 +12,11 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val MOVIES = "MOVIES"
+        const val FAVORITES = "FAVORITES"
     }
 
     private lateinit var movieList: ArrayList<Movie>
+    private lateinit var favoriteList: ArrayList<Movie>
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
