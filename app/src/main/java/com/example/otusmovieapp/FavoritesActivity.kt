@@ -1,11 +1,13 @@
 package com.example.otusmovieapp
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -36,8 +38,17 @@ class FavoritesActivity : AppCompatActivity() {
         else
             ArrayList()
 
+        initViews()
+    }
+
+    private fun initViews() {
+        val layoutManager = when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> GridLayoutManager(this, 2)
+            else -> LinearLayoutManager(this)
+        }
+
         recyclerView = findViewById(R.id.favoriteMovieRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = FavoriteMovieItemAdapter(movieList, this::deleteItem)
     }
 

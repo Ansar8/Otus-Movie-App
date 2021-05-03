@@ -2,11 +2,13 @@ package com.example.otusmovieapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -25,14 +27,22 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Movies"
 
-        movieList =
-                if (savedInstanceState != null)
-                    savedInstanceState.getParcelableArrayList(MOVIES)!!
-                else
-                    Data.movieList
+        movieList = if (savedInstanceState != null)
+            savedInstanceState.getParcelableArrayList(MOVIES)!!
+        else
+            Data.movieList
+
+        initViews()
+    }
+
+    private fun initViews() {
+        val layoutManager = when (resources.configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> GridLayoutManager(this, 2)
+            else -> LinearLayoutManager(this)
+        }
 
         recyclerView = findViewById(R.id.movieRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = MovieItemAdapter(movieList, this::showDetails, this::sendInvite)
     }
 
