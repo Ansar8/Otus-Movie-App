@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onBackPressed() {
+        ExitDialog().show(supportFragmentManager, "exitDialog")
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.favoritesItem -> {

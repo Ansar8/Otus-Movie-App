@@ -8,4 +8,5 @@
     <string name="favorites">Favorites</string>
     <string name="save">Save changes</string>
     <string name="save_changes_message">Don\'t forget to save changes !</string>
+    <string name="dialog_message">Do you want to quit ?</string>
 </resources>
