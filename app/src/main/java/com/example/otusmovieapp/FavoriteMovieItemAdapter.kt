@@ -17,7 +17,7 @@ class FavoriteMovieItemAdapter(private val items: List<Movie>,
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
-        (holder as FavoriteMovieItemViewHolder).onBind(item, position)
+        (holder as FavoriteMovieItemViewHolder).onBind(item)
     }
 
     override fun getItemCount(): Int {
