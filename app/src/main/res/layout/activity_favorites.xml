@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".FavoritesActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movieRecyclerView"
+        android:id="@+id/favoriteMovieRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingHorizontal="5dp"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_movie"
+        tools:listitem="@layout/item_favorite_movie"
         tools:itemCount="4"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
