@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -13,10 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        const val MOVIES = "MOVIES"
-    }
 
     private lateinit var movieList: ArrayList<Movie>
     private lateinit var recyclerView: RecyclerView
@@ -27,10 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Movies"
 
-        movieList = if (savedInstanceState != null)
-            savedInstanceState.getParcelableArrayList(MOVIES)!!
-        else
-            Data.movieList
+        movieList = Data.movieList
 
         initViews()
     }
@@ -44,11 +36,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.movieRecyclerView)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = MovieItemAdapter(movieList, this::showDetails, this::sendInvite)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(MOVIES, movieList)
-        super.onSaveInstanceState(outState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -72,18 +59,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
-            val removedFavorites = data?.getParcelableArrayListExtra<Movie>(FavoritesActivity.REMOVED_MOVIES)
-            updateFavoriteMovies(removedFavorites)
+            val hasUpdates = data?.getBooleanExtra(FavoritesActivity.HAS_UPDATES, false) ?: false
+            if (hasUpdates)
+                updateFavoriteMovies()
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun updateFavoriteMovies(removedFavorites: ArrayList<Movie>?) {
-        removedFavorites?.forEach { movie ->
-            movieList
-                .firstOrNull { it.id == movie.id }
-                .let { it?.isFavorite = false }
-        }
+    private fun updateFavoriteMovies() {
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
@@ -109,10 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showFavorites(){
-        val favoriteMovies = movieList.filter { it.isFavorite } as ArrayList
-
         val intent = Intent(this, FavoritesActivity::class.java)
-        intent.putExtra(FavoritesActivity.FAVORITE_MOVIES, favoriteMovies)
         startActivityForResult(intent, 0)
     }
 }

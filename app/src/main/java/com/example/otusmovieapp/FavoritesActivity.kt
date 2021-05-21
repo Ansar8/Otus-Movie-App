@@ -3,8 +3,6 @@ package com.example.otusmovieapp
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -13,15 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 
 class FavoritesActivity : AppCompatActivity() {
 
-    companion object {
-        const val FAVORITE_MOVIES = "FAVORITE_MOVIES"
-        const val REMOVED_MOVIES = "REMOVED_MOVIES"
+    companion object{
+        const val HAS_UPDATES = "HAS_UPDATES"
     }
 
     private lateinit var movieList: ArrayList<Movie>
-    private lateinit var removedList: ArrayList<Movie>
     private lateinit var recyclerView: RecyclerView
-    private var favoritesMenu: Menu? = null
+    private var isMovieListUpdated: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +25,24 @@ class FavoritesActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Favorites"
 
-        intent.getParcelableArrayListExtra<Movie>(FAVORITE_MOVIES).let {
-            movieList = it as ArrayList<Movie>
+        movieList = Data.movieList.filter { it.isFavorite } as ArrayList
+        savedInstanceState?.let {
+            isMovieListUpdated = it.getBoolean(HAS_UPDATES, false)
         }
 
-        removedList = if (savedInstanceState != null)
-            savedInstanceState.getParcelableArrayList(REMOVED_MOVIES)!!
-        else
-            ArrayList()
-
         initViews()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(HAS_UPDATES, isMovieListUpdated)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent()
+        intent.putExtra(HAS_UPDATES, isMovieListUpdated)
+        setResult(RESULT_OK, intent)
+        finish()
     }
 
     private fun initViews() {
@@ -52,42 +56,13 @@ class FavoritesActivity : AppCompatActivity() {
         recyclerView.adapter = FavoriteMovieItemAdapter(movieList, this::deleteItem)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelableArrayList(REMOVED_MOVIES, removedList)
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.favorites_menu, menu)
-        favoritesMenu = menu
-
-        favoritesMenu?.findItem(R.id.saveItem)?.isEnabled = removedList.size > 0
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.saveItem -> {
-                saveChanges()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun saveChanges() {
-        val intent = Intent()
-        intent.putExtra(REMOVED_MOVIES, removedList)
-        setResult(RESULT_OK, intent)
-        finish()
-    }
-
     private fun deleteItem(item: Movie, position: Int) {
         movieList.remove(item)
-        removedList.add(item)
         recyclerView.adapter?.notifyItemRemoved(position)
+        item.isFavorite = false
 
-        favoritesMenu?.findItem(R.id.saveItem)?.isEnabled = true
-        Toast.makeText(this, getString(R.string.save_changes_message), Toast.LENGTH_SHORT).show()
+        isMovieListUpdated = true
+
+        Toast.makeText(this, "Movie was deleted !", Toast.LENGTH_SHORT).show()
     }
 }
