@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class MovieItemViewHolder(itemView: View,
-                          val detailsClicked: (Movie, Int) -> Unit,
-                          val inviteClicked: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
+                          val detailsClicked: (Movie) -> Unit,
+                          val inviteClicked: (Movie) -> Unit,
+                          val starClicked: (Movie) -> Unit
+) : RecyclerView.ViewHolder(itemView) {
 
     private val image: ImageView = itemView.findViewById(R.id.imageView)
     private val title: TextView = itemView.findViewById(R.id.textView)
@@ -17,12 +19,13 @@ class MovieItemViewHolder(itemView: View,
     private val detailsButton: Button = itemView.findViewById(R.id.detailsBtn)
     private val inviteButton: Button = itemView.findViewById(R.id.inviteBtn)
 
-    fun onBind(item: Movie, position: Int) {
+    fun onBind(item: Movie) {
 
-        detailsButton.setOnClickListener { detailsClicked(item, position) }
+        detailsButton.setOnClickListener { detailsClicked(item) }
         inviteButton.setOnClickListener { inviteClicked(item) }
         starButton.setOnClickListener {
             item.isFavorite = !item.isFavorite
+            starClicked(item)
             setStarButtonColor(item)
         }
 
