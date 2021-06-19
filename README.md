@@ -4,3 +4,4 @@ This is the app for movie searching
 List of homeworks:
 + Homework 1: Activities
 + [Homework 2: RecyclerView, Dialogs](/Homework2.md)
++ [Homework 3: Fragments & Navigation](/Homework3.md)

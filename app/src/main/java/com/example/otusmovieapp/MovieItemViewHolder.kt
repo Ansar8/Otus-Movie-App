@@ -6,10 +6,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.otusmovieapp.MovieItemAdapter.*
 
 class MovieItemViewHolder(itemView: View,
-                          val detailsClicked: (Movie, Int) -> Unit,
-                          val inviteClicked: (Movie) -> Unit) : RecyclerView.ViewHolder(itemView) {
+                          private val listener: OnMovieClickListener
+) : RecyclerView.ViewHolder(itemView) {
 
     private val image: ImageView = itemView.findViewById(R.id.imageView)
     private val title: TextView = itemView.findViewById(R.id.textView)
@@ -17,12 +18,13 @@ class MovieItemViewHolder(itemView: View,
     private val detailsButton: Button = itemView.findViewById(R.id.detailsBtn)
     private val inviteButton: Button = itemView.findViewById(R.id.inviteBtn)
 
-    fun onBind(item: Movie, position: Int) {
+    fun onBind(item: Movie) {
 
-        detailsButton.setOnClickListener { detailsClicked(item, position) }
-        inviteButton.setOnClickListener { inviteClicked(item) }
+        detailsButton.setOnClickListener { listener.onDetailsClick(item) }
+        inviteButton.setOnClickListener { listener.onInviteClick(item) }
         starButton.setOnClickListener {
             item.isFavorite = !item.isFavorite
+            listener.onFavoriteClick(item)
             setStarButtonColor(item)
         }
 

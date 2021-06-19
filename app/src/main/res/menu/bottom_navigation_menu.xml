@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_movies"
+        android:enabled="true"
+        android:icon="@drawable/ic_movies"
+        android:title="@string/page_movies"/>
+    <item
+        android:id="@+id/page_favorites"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorites"
+        android:title="@string/page_favorites"/>
+</menu>
