@@ -12,8 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.otusmovieapp.MovieItemAdapter.*
 
-class MoviesFragment : Fragment(R.layout.fragment_movies) {
+class MoviesFragment : Fragment(R.layout.fragment_movies), OnMovieClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private var listener: OnItemSelectedListener? = null
@@ -34,12 +35,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
         recyclerView = view.findViewById(R.id.moviesRecyclerView)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = MovieItemAdapter(
-                Data.movieList,
-                this::showDetails,
-                this::sendInvite,
-                this::showFavoritesUpdate
-        )
+        recyclerView.adapter = MovieItemAdapter(Data.movieList, this)
     }
 
     override fun onAttach(context: Context) {
@@ -56,8 +52,12 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         listener = null
     }
 
+    override fun onDetailsClick(movie: Movie) {
+        listener?.onDetailsSelected(movie)
+    }
+
     @SuppressLint("QueryPermissionsNeeded")
-    private fun sendInvite(movie: Movie) {
+    override fun onInviteClick(movie: Movie) {
         val intent = Intent(Intent.ACTION_SEND)
 
         intent.type = "plain/text"
@@ -68,11 +68,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         }
     }
 
-    private fun showDetails(movie: Movie) {
-        listener?.onDetailsSelected(movie)
-    }
-
-    private fun showFavoritesUpdate(movie: Movie){
+    override fun onFavoriteClick(movie: Movie) {
         val message = if (movie.isFavorite)
             "${movie.title} was added to favorites !"
         else
