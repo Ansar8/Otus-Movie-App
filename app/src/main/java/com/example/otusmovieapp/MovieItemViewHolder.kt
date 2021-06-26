@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.otusmovieapp.MovieItemAdapter.*
 
 class MovieItemViewHolder(itemView: View,
@@ -28,7 +30,6 @@ class MovieItemViewHolder(itemView: View,
             setStarButtonColor(item)
         }
 
-        image.setImageResource(item.imageResource)
         title.text = item.title
         title.apply {
             if (item.isReviewed)
@@ -37,7 +38,17 @@ class MovieItemViewHolder(itemView: View,
                 setTextColor(Color.BLACK)
         }
 
+        setImage(item.imageUrl)
         setStarButtonColor(item)
+    }
+
+    private fun setImage( imageUrl: String){
+        Glide.with(image.context)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_error)
+            .transition(DrawableTransitionOptions.withCrossFade(500))
+            .into(image)
     }
 
     private fun setStarButtonColor(item: Movie){

@@ -11,8 +11,8 @@ class ExitDialog: DialogFragment() {
         return AlertDialog.Builder(requireContext())
             .setTitle("Warning!")
             .setView(R.layout.dialog_exit)
-            .setNegativeButton("Cancel") { dialog, which -> dismiss() }
-            .setPositiveButton("Confirm"){ dialog, which -> activity?.finish() }
+            .setNegativeButton("Cancel") { _, _ -> dismiss() }
+            .setPositiveButton("Confirm"){ _, _ -> activity?.finish() }
             .create()
     }
 }

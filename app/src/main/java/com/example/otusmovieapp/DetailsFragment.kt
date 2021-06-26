@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class DetailsFragment : Fragment(R.layout.fragment_details) {
@@ -21,8 +23,15 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<ImageView>(R.id.backdrop).setImageResource(movie.imageResource)
         view.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = movie.title
+        view.findViewById<ImageView>(R.id.backdrop).apply {
+            Glide.with(this.context)
+                .load(movie.imageUrl)
+                .placeholder(R.drawable.ic_placeholder)
+                .error(R.drawable.ic_error)
+                .transition(DrawableTransitionOptions.withCrossFade(500))
+                .into(this)
+        }
     }
 
     companion object {

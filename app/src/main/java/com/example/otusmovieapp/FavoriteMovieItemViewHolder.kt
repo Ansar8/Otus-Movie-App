@@ -4,6 +4,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class FavoriteMovieItemViewHolder(
     itemView: View,
@@ -17,7 +19,16 @@ class FavoriteMovieItemViewHolder(
     fun onBind(item: Movie) {
         deleteButton.setOnClickListener { deleteClicked(item, layoutPosition) }
 
-        image.setImageResource(item.imageResource)
         title.text = item.title
+        setImage(item.imageUrl)
+    }
+
+    private fun setImage(imageUrl: String){
+        Glide.with(image.context)
+            .load(imageUrl)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_error)
+            .transition(DrawableTransitionOptions.withCrossFade(500))
+            .into(image)
     }
 }
