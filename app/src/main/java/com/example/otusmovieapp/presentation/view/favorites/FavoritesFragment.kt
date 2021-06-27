@@ -1,4 +1,4 @@
-package com.example.otusmovieapp
+package com.example.otusmovieapp.presentation.view.favorites
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.otusmovieapp.data.domain.Movie
+import com.example.otusmovieapp.R
+import com.example.otusmovieapp.data.db.Data
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 

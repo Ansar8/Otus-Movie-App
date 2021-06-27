@@ -1,9 +1,10 @@
-package com.example.otusmovieapp
+package com.example.otusmovieapp.presentation
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import com.example.otusmovieapp.R
 
 class ExitDialog: DialogFragment() {
 

@@ -1,4 +1,4 @@
-package com.example.otusmovieapp
+package com.example.otusmovieapp.presentation.view.main
 
 import android.graphics.Color
 import android.view.View
@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.otusmovieapp.MovieItemAdapter.*
+import com.example.otusmovieapp.R
+import com.example.otusmovieapp.presentation.view.main.MovieItemAdapter.*
+import com.example.otusmovieapp.data.domain.Movie
 
 class MovieItemViewHolder(itemView: View,
                           private val listener: OnMovieClickListener

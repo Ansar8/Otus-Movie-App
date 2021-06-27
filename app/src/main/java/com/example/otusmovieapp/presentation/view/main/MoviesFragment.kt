@@ -1,4 +1,4 @@
-package com.example.otusmovieapp
+package com.example.otusmovieapp.presentation.view.main
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,12 +14,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.otusmovieapp.MovieItemAdapter.*
+import com.example.otusmovieapp.App
+import com.example.otusmovieapp.BuildConfig
+import com.example.otusmovieapp.R
+import com.example.otusmovieapp.presentation.view.main.MovieItemAdapter.*
+import com.example.otusmovieapp.data.db.Data
 import com.example.otusmovieapp.data.network.response.MoviesResponse
+import com.example.otusmovieapp.data.domain.Movie
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class MoviesFragment : Fragment(R.layout.fragment_movies), OnMovieClickListener {
 

@@ -1,4 +1,4 @@
-package com.example.otusmovieapp
+package com.example.otusmovieapp.presentation.view.favorites
 
 import android.view.View
 import android.widget.ImageView
@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.otusmovieapp.data.domain.Movie
+import com.example.otusmovieapp.R
 
 class FavoriteMovieItemViewHolder(
     itemView: View,

@@ -1,4 +1,4 @@
-package com.example.otusmovieapp
+package com.example.otusmovieapp.data.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

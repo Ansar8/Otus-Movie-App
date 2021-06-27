@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.otusmovieapp.MoviesFragment.*
+import com.example.otusmovieapp.data.domain.Movie
+import com.example.otusmovieapp.presentation.view.main.MoviesFragment.*
+import com.example.otusmovieapp.presentation.ExitDialog
+import com.example.otusmovieapp.presentation.view.details.DetailsFragment
+import com.example.otusmovieapp.presentation.view.favorites.FavoritesFragment
+import com.example.otusmovieapp.presentation.view.main.MoviesFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), OnItemSelectedListener {
